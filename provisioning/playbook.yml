@@ -1,0 +1,4 @@
+---
+- name: Interstellar Ansible deploy playbook
+  hosts: default
+  sudo: yes
