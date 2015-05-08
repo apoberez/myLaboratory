@@ -1,0 +1,17 @@
+ap_blog_homepage:
+    path:     /
+    defaults: { _controller: APBlogBundle:Default:index }
+
+ap_blog_posts:
+    path: /api/v1/posts.{_format}
+    defaults: { _controller: APBlogBundle:Post:posts, _format: html }
+    methods: ['GET']
+    requirements:
+        _format: html|json
+
+ap_blog_comments:
+    path: /api/v1/comments.{_format}
+    defaults: { _controller: APBlogBundle:Comments:commentsList, _format: html }
+    methods: ['GET']
+    requirements:
+        _format: html|json

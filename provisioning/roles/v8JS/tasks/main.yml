@@ -1,0 +1,6 @@
+---
+
+  - include: v8.yml
+    when: true
+
+  - shell: echo 1

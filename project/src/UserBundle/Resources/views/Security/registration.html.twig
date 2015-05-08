@@ -1,0 +1,11 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <h1 class="col-sm-offset-1">{{ "form.registration.title" | trans }}:</h1>
+    <div id="registration-form"></div>
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('dist/js/main.js') }}"></script>
+{% endblock %}

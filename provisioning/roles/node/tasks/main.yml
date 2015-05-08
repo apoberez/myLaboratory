@@ -1,0 +1,18 @@
+---
+- name: build-essential libssl-dev
+  apt: pkg={{ item }} state=latest force=yes update_cache=yes
+  with_items:
+    - build-essential
+    - libssl-dev
+
+- name: download nvm
+  git: repo=https://github.com/creationix/nvm.git dest=/tmp/nvm
+
+- name: download nvm
+  git: repo=https://github.com/creationix/nvm.git dest=/tmp/nvm
+
+- name: install nvm
+  shell: /tmp/nvm/install.sh
+
+- name: install node
+  shell: nvm install 0.11.13

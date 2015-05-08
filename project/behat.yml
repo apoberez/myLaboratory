@@ -1,0 +1,29 @@
+default:
+    suites:
+        product_properties:
+            paths: [ %paths.base%/src/AP/MarketBundle/Features/ProductProperties ]
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - AP\MarketBundle\Features\ProductProperties\bootstrap\ProductPropertiesContext
+        user:
+            paths: [ %paths.base%/src/UserBundle/Features ]
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+            tags: user
+
+    extensions:
+        Behat\MinkExtension:
+            sessions:
+                default:
+                    symfony2: ~
+                javascript:
+                    selenium2:
+                        browser: chrome
+                        wd_host: http://192.168.66.1:4444/wd/hub
+            base_url: 'http://interstellar.dev/app_test.php'
+            browser_name: firefox
+
+        Behat\Symfony2Extension:
+            kernel:
+                env: test
+                debug: true

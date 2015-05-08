@@ -2,3 +2,16 @@
 - name: Interstellar Ansible deploy playbook
   hosts: default
   sudo: yes
+
+  vars:
+    index_file: app_dev
+    project_root: /var/www/interstellar.dev/project
+
+  roles:
+#    - common
+#    - nginx
+#    - php
+#    - symfony
+    - v8JS
+#    - node
+#    - mongo

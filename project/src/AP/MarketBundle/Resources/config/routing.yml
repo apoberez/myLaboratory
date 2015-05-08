@@ -1,0 +1,7 @@
+ap_market_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: APMarketBundle:Default:index }
+
+product_properties:
+    resource: @APMarketBundle/Resources/config/admin/routing/product-properties.yml
+    prefix: /admin/

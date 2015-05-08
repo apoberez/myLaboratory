@@ -1,0 +1,11 @@
+AP\BlogBundle\Document\Post:
+    type: document
+    fields:
+        id:
+            id:  true
+        title:
+            type: string
+        pubDate:
+            type: date
+        content:
+            type: string

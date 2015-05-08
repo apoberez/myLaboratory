@@ -1,0 +1,6 @@
+---
+- name: copy nginx config for vagrant user
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+
+- name: copy php-fpm config for vagrant user
+  template: src=www.conf dest=/etc/php5/fpm/pool.d/www.conf

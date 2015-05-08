@@ -1,4 +1,5 @@
 project/web/bundles/
+project/web/node_modules/*
 project/app/bootstrap.php.cache
 project/app/cache/*
 project/app/config/parameters.yml
@@ -10,5 +11,6 @@ project/build/
 project/vendor/
 project/bin/
 project/composer.phar
+selenium-server-standalone-2.45.0.jar
 .idea
 .vagrant

@@ -11,6 +11,8 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
+nelmio_api_doc: ~
+
 monolog:
     handlers:
         main:

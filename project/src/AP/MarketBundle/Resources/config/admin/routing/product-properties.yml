@@ -1,0 +1,3 @@
+product_properties_new:
+    path: /product-properties/new
+    defaults: { _controller: APMarketBundle:Admin/ProductProperties:create }

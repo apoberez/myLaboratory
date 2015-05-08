@@ -19,6 +19,7 @@ framework:
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
+    translator: { fallbacks: [en_EN] }
     session:
         # handler_id set to null will use default session handler from php.ini
         handler_id:  ~
@@ -43,7 +44,7 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
 
-# Doctrine Configuration
+#Doctrine Configuration
 doctrine:
     dbal:
         driver:   "%database_driver%"
@@ -63,6 +64,16 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
+
+doctrine_mongodb:
+    connections:
+        default:
+            server: mongodb://localhost:27017
+            options: {}
+    default_database: test_database
+    document_managers:
+        default:
+            auto_mapping: true
 
 # Swiftmailer Configuration
 swiftmailer:
