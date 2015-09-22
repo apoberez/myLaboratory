@@ -1,9 +1,0 @@
-regitration_page:
-    path: '/user/registration'
-    defaults: { _controller: UserBundle:Security:registrationPage }
-    methods: [ 'GET' ]
-
-registration_submit:
-    path: '/user/registration'
-    defaults: { _controller: UserBundle:Security:accountCreate }
-    methods: [ 'POST' ]
