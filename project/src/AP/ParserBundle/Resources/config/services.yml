@@ -1,4 +1,8 @@
 services:
-#    ap_parser.example:
-#        class: AP\ParserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    parser_consumer:
+        class: AP\ParserBundle\Rabbit\ParserConsumer
+
+    parser:
+        class: AP\ParserBundle\Parsers\Parser
+        arguments:
+            - @old_sound_rabbit_mq.parser_producer

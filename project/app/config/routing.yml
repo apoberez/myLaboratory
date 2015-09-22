@@ -1,5 +1,15 @@
+react:
+    resource: "@ReactBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ap_user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/
+    requirements:
+        _locale: en_EN|ua_UA|ua_RU
+
+ap_parser:
+    resource: "@APParserBundle/Resources/config/routing.yml"
+    prefix:   /admin/parser
     requirements:
         _locale: en_EN|ua_UA|ua_RU

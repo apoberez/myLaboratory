@@ -17,8 +17,11 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AP\BlogBundle\APBlogBundle(),
-            new Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle(),
             new UserBundle\UserBundle(),
+            new ReactBundle\ReactBundle(),
+            new AP\ParserBundle\APParserBundle(),
+            new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+            new AP\RedisBundle\APRedisBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

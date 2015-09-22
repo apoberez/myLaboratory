@@ -13,6 +13,13 @@ var SecurityActions = {
             password: password,
             passwordConfirm: confirm
         });
+    },
+
+    updateRegistration: function(formData){
+        AppDispatcher.dispatch({
+            actionType: SecurityConstants.REGISTRATION_FORM_CHANGED,
+            formData: formData
+        });
     }
 };
 

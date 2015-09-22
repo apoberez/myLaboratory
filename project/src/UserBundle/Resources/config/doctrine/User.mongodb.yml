@@ -10,6 +10,7 @@ UserBundle\Document\User:
             type: string
         email:
             type: string
+            unique: true
         password:
             type: string
         enabled:

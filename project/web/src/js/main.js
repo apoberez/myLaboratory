@@ -7,4 +7,3 @@ var React = require('react');
 
 
 React.render(<RegForm />, document.getElementById('registration-form'));
-console.log(1);

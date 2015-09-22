@@ -1,0 +1,3 @@
+react_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ReactBundle:Default:index }

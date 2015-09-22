@@ -1,0 +1,3 @@
+---
+
+#- shell: npm install gulp gulp-browserify gulp-concat react reactify

@@ -11,18 +11,14 @@ namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('email', 'email');
-        $builder->add('plainPassword', 'repeated', [
-            'first_name' => 'password',
-            'second_name' => 'confirm',
-            'type' => 'password'
-        ]);
-        $builder->add('submit', 'submit');
+        $builder->add('plainPassword', 'password');
     }
 
     /**
@@ -33,5 +29,13 @@ class RegistrationType extends AbstractType
     public function getName()
     {
         return 'registration';
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class'      => 'UserBundle\Document\User',
+            'csrf_protection' => false
+        ));
     }
 }

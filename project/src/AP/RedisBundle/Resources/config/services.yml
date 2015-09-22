@@ -1,0 +1,4 @@
+services:
+    ap_redis.connection:
+        class: AP\RedisBundle\Connection
+        arguments: [ %redis_host%, %redis_port% ]

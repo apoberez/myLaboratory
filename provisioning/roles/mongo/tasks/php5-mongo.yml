@@ -1,0 +1,33 @@
+---
+
+- shell: export LC_ALL="en_US.UTF-8" && locale-gen en_US.UTF-8
+
+- git: repo=https://github.com/mongodb/mongo-php-driver.git dest=/tmp/mongo-php-driver
+
+- shell: git checkout 1.6.8
+  args:
+    chdir: /tmp/mongo-php-driver
+
+- shell: phpize
+  args:
+    chdir: /tmp/mongo-php-driver
+
+- shell: ./configure
+  args:
+    chdir: /tmp/mongo-php-driver
+
+- shell: make
+  args:
+    chdir: /tmp/mongo-php-driver
+
+- shell: make install
+  args:
+    chdir: /tmp/mongo-php-driver
+
+- template: src=mongo.ini dest=/etc/php5/mods-available/mongo.ini
+
+- shell: ln -s /etc/php5/mods-available/mongo.ini /etc/php5/fpm/conf.d/mongo.ini
+- shell: ln -s /etc/php5/mods-available/mongo.ini /etc/php5/cli/conf.d/mongo.ini
+
+- name: restart php-fpm
+  action: service name=php5-fpm state=restarted enabled=yes

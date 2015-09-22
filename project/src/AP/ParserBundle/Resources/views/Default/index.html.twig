@@ -1,1 +1,28 @@
 {% extends '::base.html.twig' %}
+
+{% block body %}
+    <form method="post" class="form-horizontal">
+        <div class="form-group">
+            <label for="startUrl" class="col-sm-2 control-label">Url to start:</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="startUrl">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="category" class="col-sm-2 control-label">Category to load:</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="category">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success" disabled>Start</button>
+            </div>
+        </div>
+    </form>
+    <div id="registration-form"></div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ asset('dist/parser.js') }}"></script>
+{% endblock %}

@@ -10,38 +10,48 @@ var RegistrationStore = require('../stores/RegistrationStore');
 var FormHorizontal = require('./FormHorizontal');
 var Actions = require('../actions/SecurityActions');
 var cx = require('classnames');
+var assign = require('object-assign');
 
 var RegForm = React.createClass({
 
+
     getInitialState: function () {
         return {
-            email: '',
-            password: '',
-            passwordConfirm: '',
+            formData: this.getComponentsData(),
+            disabled: true,
             errors: {}
         }
     },
 
     render: function () {
+        var fields = {
+            EMAIL: 'email'
+        };
         return (
             <FormHorizontal>
                 <FormHorizontal.Input
-                    errors={this.state.errors.email}
+                    ref={fields.EMAIL}
+                    name={fields.EMAIL}
+                    errors={this.state.errors[fields.EMAIL]}
                     label='Email'
                     placeholder='enter email'
-                    onChange={this.setEmail}
+                    onChange={this._onChange}
                 />
                 <FormHorizontal.Input
+                    ref='password'
+                    name='password'
                     errors={this.state.errors.password}
                     label='Password'
                     placeholder='enter password'
-                    onChange={this.setPassword}
+                    onChange={this._onChange}
                 />
                 <FormHorizontal.Input
+                    ref='passwordConfirm'
+                    name='passwordConfirm'
                     errors={this.state.errors.passwordConfirm}
                     label='Confirm'
                     placeholder='confirm password'
-                    onChange={this.setPasswordConfirm}
+                    onChange={this._onChange}
                 />
                 <FormHorizontal.Submit onClick={this.submitRegistration} label='Submit' disabled={this.state.disabled}/>
             </FormHorizontal>
@@ -50,39 +60,47 @@ var RegForm = React.createClass({
 
 
     componentDidMount: function () {
-        RegistrationStore.addFailListener(this._onFail);
-        RegistrationStore.addSuccessListener(this._onSuccess);
+        RegistrationStore.addFailListener(this._onValidation);
+        RegistrationStore.addSuccessListener(this._onValidation);
     },
 
     componentWillUnmount: function () {
         //RegistrationStore.removeChangeListener(this._onChange);//todo
     },
 
-    setEmail: function (e) {
-        this.setState({email: e.target.value});
-    },
-
-    setPassword: function (e) {
-        this.setState({password: e.target.value});
-    },
-
-    setPasswordConfirm: function (e) {
-        this.setState({passwordConfirm: e.target.value});
-    },
-
     submitRegistration: function (e) {
         e.preventDefault();
+        Actions.confirmRegistration(this.state.formData);
+    },
+
+    getComponentsData: function () {
+        var data = {};
+        for(var component in this.refs) {
+            if (this.refs.hasOwnProperty(component)) {
+                data[component] = this.refs[component].getValue();
+            }
+        }
+        return data;
+    },
+
+    _onChange: function (e, field, value) {
+        var formData = assign({}, this.state.formData);
+        formData[field] = value;
+        this.setState({formData: formData});
+        Actions.updateRegistration(formData);
+    },
+
+    _onValidation: function () {
+        var errors = RegistrationStore.getErrors();
+        console.log(errors ? true : false);
         this.setState({
-            disabled: true
+            errors: errors || {},
+            disabled: errors ? true : false
         });
-        Actions.confirmRegistration(this.state.email, this.state.password, this.state.passwordConfirm);
     },
 
     _onFail: function () {
-        this.setState({
-            errors: RegistrationStore.getErrors(),
-            disabled: false
-        });
+
     },
 
     _onSuccess: function () {

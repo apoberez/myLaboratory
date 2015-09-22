@@ -1,2 +1,30 @@
 ---
 
+- shell: export LC_ALL="en_US.UTF-8" && locale-gen en_US.UTF-8
+
+- git: repo=https://github.com/preillyme/v8js.git dest=/tmp/v8js
+
+- shell: phpize
+  args:
+    chdir: /tmp/v8js
+
+- shell: ./configure
+  args:
+    chdir: /tmp/v8js
+
+- shell: make
+  args:
+    chdir: /tmp/v8js
+
+- shell: yes '' | make test
+  args:
+    chdir: /tmp/v8js
+
+- shell: make install
+  args:
+    chdir: /tmp/v8js
+
+- template: src=v8js.ini dest=/etc/php5/mods-available/v8js.ini
+
+- shell: ln -s /etc/php5/mods-available/v8js.ini /etc/php5/fpm/conf.d/v8js.ini
+  notify: restart php-fpm

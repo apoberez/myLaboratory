@@ -8,10 +8,10 @@
     project_root: /var/www/interstellar.dev/project
 
   roles:
-#    - common
-#    - nginx
-#    - php
-#    - symfony
+    - common
+    - nginx
+    - php
+    - symfony
     - v8JS
-#    - node
-#    - mongo
+    - node
+    - mongo

@@ -7,8 +7,17 @@
     "bootstrap": "~3.3.4",
     "gulp": "~3.8.11",
     "gulp-browserify": "~0.5.1",
-    "react": "~0.13.1",
-    "jquery": "~2.1.3"
+    "babelify": "",
+    "browserify": "",
+    "vinyl-source-stream": "",
+    "validator": "",
+    "jquery": "~2.1.3",
+    "react": "",
+    "gulp-concat": "",
+    "classnames": "",
+    "flux": "",
+    "reactify": "",
+    "object-assign": ""
   },
   "devDependencies": {},
   "scripts": {

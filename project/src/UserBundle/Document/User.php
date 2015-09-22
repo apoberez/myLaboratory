@@ -162,6 +162,16 @@ class User implements UserInterface
     }
 
     /**
+     * Get enabled
+     *
+     * @return boolean $enabled
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
      * Returns the roles granted to the user.
      *
      * <code>

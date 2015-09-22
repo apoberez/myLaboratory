@@ -8,11 +8,16 @@
 - name: download nvm
   git: repo=https://github.com/creationix/nvm.git dest=/tmp/nvm
 
-- name: download nvm
-  git: repo=https://github.com/creationix/nvm.git dest=/tmp/nvm
-
 - name: install nvm
+  sudo: no
   shell: /tmp/nvm/install.sh
 
+- lineinfile: >
+      dest=/home/vagrant/.profile
+      line="source ~/.nvm/nvm.sh"
+
 - name: install node
-  shell: nvm install 0.11.13
+  sudo: no
+  shell: bash -lc 'nvm install  0.12.2 && nvm use 0.12.2'
+  args:
+    executable: /bin/bash

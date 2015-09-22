@@ -1,21 +1,21 @@
 var gulp = require('gulp');
-var browserify = require('gulp-browserify');
-var concat = require('gulp-concat');
 
-gulp.task('browserify', function(){
-    gulp.src('src/js/main.js')
-        .pipe(browserify({transform: 'reactify', debug: true}))
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest('dist/js'))
+var babelify = require('babelify');
+var browserify = require('browserify');
+var source = require('vinyl-source-stream');
+
+gulp.task('modules', function() {
+    browserify({
+        entries: './src/js/pages/parser.js',
+        debug: true
+    })
+        .transform(babelify)
+        .bundle()
+        .pipe(source('parser.js'))
+        .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('copy', function(){
-    gulp.src('src/index.html')
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('default', ['browserify', 'copy']);
 
 gulp.task('watch', function(){
-    gulp.watch('src/**/*.*', ['default']);
+    gulp.watch('src/**/*.*', ['modules']);
 });

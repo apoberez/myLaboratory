@@ -1,6 +1,13 @@
 ---
 
-  - include: v8.yml
-    when: true
+  - stat: path=/usr/lib/libv8.so
+    register: libv8
 
-  - shell: echo 1
+  - stat: path=/etc/php5/mods-available/v8js.ini
+    register: v8js
+
+  - include: v8.yml
+    when: libv8.stat.exists == False
+
+  - include: php-v8js.yml
+    when: v8js.stat.exists == False

@@ -1,8 +1,18 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <h1 class="col-sm-offset-1">{{ "form.registration.title" | trans }}:</h1>
-    <div id="registration-form"></div>
+    <div class="col-sm-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{- "form.registration.title" | trans -}}:</h3>
+            </div>
+            <div class="panel-body" style="padding: 15px">
+                <div id="registration-form">
+                    {{- regForm | raw -}}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block scripts %}

@@ -91,13 +91,20 @@ function isEmptyObject(obj) {
 var errors = {};
 var message = '';
 
+function prepareData () {
+    return {
+        plainPassword: model.password,
+        email: model.email
+    }
+}
+
 var RegistrationStore = assign({}, EventEmitter.prototype, {
     getState: function () {
         return model;
     },
 
     getErrors: function () {
-        return errors;
+        return !isEmptyObject(errors) ? errors : null;
     },
 
     getMessage: function () {
@@ -108,35 +115,41 @@ var RegistrationStore = assign({}, EventEmitter.prototype, {
         return !isEmptyObject(errors);
     },
 
-    submit: function () {
+    validate: function () {
         errors = modelValidator.validate();
         if (this.hasErrors()) {
             this.emitFail();
         } else {
-            this.sync();
+            this.emitSuccess();
         }
     },
 
-    sync: function () {
+    submit: function () {
         var self = this;
         $.ajax({
             method: 'post',
             url: '/en_EN/user/registration',
             dataType: 'json',
+            data: {
+                registration: prepareData()
+            },
             success: function (response) {
-                message = response.message;
+                message = response.message || '';
                 self.emitSuccess();
             },
             error: function (response) {
-                response = JSON.parse(response.responseText);
-                message = response.message;
-                errors = response.errors;
+                try {
+                    response = JSON.parse(response.responseText);
+                    message = response.message;
+                    errors = response.errors;
+                } catch (e) {
+                    message = 'Server error happened :(';
+                    errors = {'email': 'email already used'};
+                }
                 self.emitFail();
-            },
-            data: model
+            }
         });
     },
-
 
     addSuccessListener: function (callback) {
         this.on(constants.REGISTRATION_SUCCESS, callback)
@@ -166,11 +179,15 @@ var RegistrationStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function (payload) {
     switch (payload.actionType) {
         case constants.CONFIRM_REGISTRATION:
-            model.email = payload.email;
-            model.password = payload.password;
-            model.passwordConfirm = payload.passwordConfirm;
+            assign(model, payload.formData);
             RegistrationStore.submit();
+            break;
+        case  constants.REGISTRATION_FORM_CHANGED:
+            assign(model, payload.formData);//todo for-in
+            RegistrationStore.validate();
+            break;
     }
+    return true;
 });
 
 module.exports = RegistrationStore;

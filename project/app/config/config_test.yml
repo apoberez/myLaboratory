@@ -15,8 +15,5 @@ web_profiler:
 swiftmailer:
     disable_delivery: true
 
-doctrine_mongodb:
-    default_database: interstellar_test
-
 parameters:
     base_url: "http://interstellar.dev/app_test"
